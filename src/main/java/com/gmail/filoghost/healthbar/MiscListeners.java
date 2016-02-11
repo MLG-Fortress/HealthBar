@@ -314,7 +314,7 @@ public class MiscListeners implements Listener {
             }
             if (p.getName().length() > 14) {
                 //p.setPlayerListName(p.getName().substring(0, 14));
-                p.setPlayerListName(ChatColor.WHITE + p.getName());
+                p.setPlayerListName(p.getDisplayName());
             } else {
                 p.setPlayerListName("§f" + p.getName());
             }
