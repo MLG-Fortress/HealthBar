@@ -28,6 +28,7 @@ import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
+import org.bukkit.ChatColor;
 
 import com.gmail.filoghost.healthbar.api.HealthBarAPI;
 import java.util.Collection;
@@ -312,8 +313,8 @@ public class MiscListeners implements Listener {
                 return; //is already colored!
             }
             if (p.getName().length() > 14) {
-                p.setPlayerListName(p.getName().substring(0, 14));
-                p.setPlayerListName(p.getName());
+                //p.setPlayerListName(p.getName().substring(0, 14));
+                p.setPlayerListName(ChatColor.WHITE + p.getName());
             } else {
                 p.setPlayerListName("§f" + p.getName());
             }
