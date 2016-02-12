@@ -105,6 +105,8 @@ public class PlayerBar {
     public static void setHealthSuffix(Player player, double health, double max) {
 
         OfflinePlayer op = (OfflinePlayer) player;
+        if (op == null)
+            return;
 
         if (useCustomBar || (!textMode)) {
             int healthOn10 = Utils.roundUpPositiveWithMax(((health * 10.0) / max), 10);
