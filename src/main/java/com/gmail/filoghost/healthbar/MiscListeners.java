@@ -312,14 +312,10 @@ public class MiscListeners implements Listener {
             if (p.getPlayerListName().startsWith("§")) {
                 return; //is already colored!
             }
-            if (p.getName().length() > 14) {
-                p.setPlayerListName(p.getName().substring(0, 14));
-                scheduler.scheduleSyncDelayedTask(instance, new Runnable()
-                {
-                    public void run() {
-                        p.setPlayerListName(p.getName());
-                    }
-                }, 1L);
+            if (p.getName().length() > 14)
+            {
+                System.out.println(p.getName().toString());
+                p.setPlayerListName(p.getName().toString());
             } else {
                 p.setPlayerListName("§f" + p.getName());
             }
