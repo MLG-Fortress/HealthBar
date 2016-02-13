@@ -151,9 +151,9 @@ public class PlayerBarUtils {
     public static void removeAllHealthbarTeams(Scoreboard sb) {
         Set<Team> teamList = sb.getTeams();
         for (Team team : teamList) {
-            if (team.getName().contains("hbr")) {
+            //if (team.getName().contains("hbr")) {
                 team.unregister();
-            }
+            //}
         }
     }
 

@@ -102,6 +102,18 @@ public class PlayerBar {
         }
     }
 
+    //Used in PlayerQuitEvent
+    public static void removeTeam(Player player)
+    {
+        OfflinePlayer op = player;
+        if (op == null) //shouldn't happen
+            return;
+
+        Team team = sb.getTeam(op.getName());
+        if (team == null)
+            team.unregister();
+    }
+
     public static void setHealthSuffix(Player player, double health, double max) {
 
         OfflinePlayer op = (OfflinePlayer) player;
