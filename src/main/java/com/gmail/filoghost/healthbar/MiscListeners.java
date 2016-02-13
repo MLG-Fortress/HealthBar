@@ -308,13 +308,14 @@ public class MiscListeners implements Listener {
 
     //only needed for joinEvent
     private static void fixTabName(Player p) {
-        if (fixTabNames && !pluginDisabledWhiteTabNames) {
-            if (p.getPlayerListName().equals(p.getName()))
+        if (fixTabNames && !pluginDisabledWhiteTabNames)
+        {
+            if (p.getPlayerListName().endsWith("§f"))
             {
-                return; //is already altered!
+                return; //is already edited
             }
 
-            p.setPlayerListName("§f" + p.getName());
+            p.setPlayerListName(p.getPlayerListName() + "§f");
         }
     }
 
