@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.filoghost.healthbar.metrics.MetricsLite;
@@ -101,6 +102,11 @@ public class Main extends JavaPlugin {
         DeathListener.loadConfiguration();
         PlayerBar.loadConfiguration();
         MiscListeners.loadConfiguration();
+    }
+
+    public void reloadPlayerBar(Player p)
+    {
+        MiscListeners.updatePlayer(p);
     }
 
     public static MiscListeners getLoginListenerInstance() {

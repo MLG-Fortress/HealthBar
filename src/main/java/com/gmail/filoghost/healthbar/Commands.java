@@ -1,8 +1,10 @@
 package com.gmail.filoghost.healthbar;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class Commands implements CommandExecutor {
 
@@ -28,6 +30,15 @@ public class Commands implements CommandExecutor {
         if (args[0].equalsIgnoreCase("reload")) {
             reloadConfigs(sender);
             return true;
+        }
+        if (args[0].equalsIgnoreCase("reloadplayer"))
+        {
+            if (args.length < 2)
+                return false;
+            Player p = Bukkit.getPlayer(args[1]);
+            if (p == null)
+                return false;
+            instance.reloadPlayerBar(p);
         }
 
         sender.sendMessage(PREFIX + "§eUnknown command. Type §a" + label + " §efor help.");

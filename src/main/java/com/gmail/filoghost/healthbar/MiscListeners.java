@@ -302,7 +302,7 @@ public class MiscListeners implements Listener {
         }
     }
 
-    private static void updatePlayer(final Player p) {
+    public static void updatePlayer(final Player p) {
         //first off, update health below
         PlayerBar.updateHealthBelow(p);
 
