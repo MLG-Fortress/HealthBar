@@ -314,11 +314,13 @@ public class MiscListeners implements Listener {
             {
                 return; //is already edited
             }
+
+            //Feature: Sets list name according to display name
             scheduler.scheduleSyncDelayedTask(instance, new Runnable() {
                 @Override
                 public void run()
                 {
-                    p.setPlayerListName(p.getPlayerListName() + "§f");
+                    p.setPlayerListName(p.getDisplayName() + "§f");
                 }
             }, 20L);
         }
