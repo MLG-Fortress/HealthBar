@@ -108,9 +108,48 @@ public class PlayerBar {
         if (op == null)
             return;
 
-        if (useCustomBar || (!textMode)) {
+        if (useCustomBar || (!textMode))
+        {
+            Team team = sb.getTeam(op.getName());
+            if (team == null)
+            {
+                team = sb.registerNewTeam(op.getName());
+            }
             int healthOn10 = Utils.roundUpPositiveWithMax(((health * 10.0) / max), 10);
-            sb.getTeam("hbr" + Integer.toString(healthOn10)).addPlayer((op));
+            switch (healthOn10)
+            {
+                case 1:
+                    team.setSuffix(" §c▌§8▌▌▌▌▌▌▌▌▌");
+                    break;
+                case 2:
+                    team.setSuffix(" §c▌▌§8▌▌▌▌▌▌▌▌");
+                    break;
+                case 3:
+                    team.setSuffix(" §e▌▌▌§8▌▌▌▌▌▌▌");
+                    break;
+                case 4:
+                    team.setSuffix(" §e▌▌▌▌§8▌▌▌▌▌▌");
+                    break;
+                case 5:
+                    team.setSuffix(" §e▌▌▌▌▌§8▌▌▌▌▌");
+                    break;
+                case 6:
+                    team.setSuffix(" §a▌▌▌▌▌▌§8▌▌▌▌");
+                    break;
+                case 7:
+                    team.setSuffix(" §a▌▌▌▌▌▌▌§8▌▌▌");
+                    break;
+                case 8:
+                    team.setSuffix(" §a▌▌▌▌▌▌▌▌§8▌▌");
+                    break;
+                case 9:
+                    team.setSuffix(" §a▌▌▌▌▌▌▌▌▌§8▌");
+                    break;
+                case 10:
+                    team.setSuffix(" §a▌▌▌▌▌▌▌▌▌▌");
+                    break;
+            }
+            team.addPlayer(op);
         } else {
 
             int intHealth = Utils.roundUpPositive(health);
@@ -159,7 +198,7 @@ public class PlayerBar {
         if (useCustomBar) {
             PlayerBarUtils.create10CustomTeams(sb, Utils.loadFile("custom-player-bar.yml", INSTANCE));
         } else if (!textMode) {
-            PlayerBarUtils.create10DefaultTeams(sb, config.getInt(Configuration.Nodes.PLAYERS_AFTER_STYLE.getNode()));
+        //    PlayerBarUtils.create10DefaultTeams(sb, config.getInt(Configuration.Nodes.PLAYERS_AFTER_STYLE.getNode()));
         }
         //else creates the teams at the moment
 
