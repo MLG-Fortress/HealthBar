@@ -314,8 +314,13 @@ public class MiscListeners implements Listener {
             {
                 return; //is already edited
             }
-
-            p.setPlayerListName(p.getPlayerListName() + "§f");
+            scheduler.scheduleSyncDelayedTask(instance, new Runnable() {
+                @Override
+                public void run()
+                {
+                    p.setPlayerListName(p.getPlayerListName() + "§f");
+                }
+            }, 20L);
         }
     }
 
