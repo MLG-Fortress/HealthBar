@@ -316,7 +316,7 @@ public class MiscListeners implements Listener {
     private static void fixTabName(Player p) {
         if (fixTabNames && !pluginDisabledWhiteTabNames)
         {
-            if (p.getPlayerListName().endsWith("§f"))
+            if (p.getPlayerListName().equals(p.getName()))
             {
                 return; //is already edited
             }
@@ -328,7 +328,7 @@ public class MiscListeners implements Listener {
                 {
                     p.setPlayerListName(p.getDisplayName() + "§f");
                 }
-            }, 20L);
+            });
         }
     }
 

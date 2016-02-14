@@ -39,6 +39,7 @@ public class Commands implements CommandExecutor {
             if (p == null)
                 return false;
             instance.reloadPlayerBar(p);
+            return true;
         }
 
         sender.sendMessage(PREFIX + "§eUnknown command. Type §a" + label + " §efor help.");
