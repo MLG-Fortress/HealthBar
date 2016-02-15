@@ -316,25 +316,11 @@ public class MiscListeners implements Listener {
     private static void fixTabName(Player p) {
         if (fixTabNames && !pluginDisabledWhiteTabNames)
         {
-            if (p.getPlayerListName().equals(p.getName()))
-            {
+            if (!p.getPlayerListName().equals(p.getName()))
                 return; //is already edited
-            }
 
             //Feature: Sets list name according to display name
-            scheduler.scheduleSyncDelayedTask(instance, new Runnable() {
-                @Override
-
-                public void run()
-                {
-                    //Check again in case something does change player name after onjoin.
-                    if (p.getPlayerListName().equals(p.getName()))
-                    {
-                        return; //is already edited
-                    }
-                    p.setPlayerListName(p.getDisplayName() + "§f");
-                }
-            });
+            p.setPlayerListName(p.getDisplayName() + "§f");
         }
     }
 
