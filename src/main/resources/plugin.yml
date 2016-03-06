@@ -1,5 +1,5 @@
 name: HealthBar
-authors: [filoghost,electronrussia]
+authors: [filoghost,electronrussia, RoboMWM]
 main: com.gmail.filoghost.healthbar.Main
 version: ${project.version}
 website: http://dev.bukkit.org/bukkit-plugins/health-bar/
