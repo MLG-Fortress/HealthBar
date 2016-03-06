@@ -17,13 +17,10 @@ import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.*;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
@@ -32,6 +29,8 @@ import org.bukkit.ChatColor;
 
 import com.gmail.filoghost.healthbar.api.HealthBarAPI;
 import java.util.Collection;
+
+import static com.gmail.filoghost.healthbar.PlayerBar.removeTeam;
 
 public class MiscListeners implements Listener {
 
@@ -191,6 +190,13 @@ public class MiscListeners implements Listener {
         }, 1L);
     }
 
+    //Unregister team on player quit to prevent memory leaks
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerQuit(PlayerQuitEvent event)
+    {
+        removeTeam(event.getPlayer());
+    }
+
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
     public void playerTeleport(final PlayerTeleportEvent event) {
         //always check this on all the events!
@@ -296,7 +302,7 @@ public class MiscListeners implements Listener {
         }
     }
 
-    private static void updatePlayer(final Player p) {
+    public static void updatePlayer(final Player p) {
         //first off, update health below
         PlayerBar.updateHealthBelow(p);
 
@@ -310,12 +316,11 @@ public class MiscListeners implements Listener {
     private static void fixTabName(Player p) {
         if (fixTabNames && !pluginDisabledWhiteTabNames)
         {
-            if (p.getPlayerListName().endsWith("§f"))
-            {
+            if (!p.getPlayerListName().equals(p.getName()))
                 return; //is already edited
-            }
 
-            p.setPlayerListName(p.getPlayerListName() + "§f");
+            //Feature: Sets list name according to display name
+            p.setPlayerListName(p.getDisplayName() + "§f");
         }
     }
 
