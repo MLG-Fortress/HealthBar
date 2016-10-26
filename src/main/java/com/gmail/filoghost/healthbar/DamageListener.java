@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.gmail.nossr50.MobHealthbarUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -85,7 +86,7 @@ public class DamageListener implements Listener {
             return;
         }
 
-        if (entity instanceof Player) {
+        if (entity.getType() == EntityType.PLAYER) {
             if (playerEnabled) {
                 parsePlayerHit((Player) entity, event instanceof EntityDamageByEntityEvent);
                 return;
@@ -103,7 +104,7 @@ public class DamageListener implements Listener {
         Entity entity = event.getEntity();
 
         if (playerEnabled) {
-            if (entity instanceof Player) {
+            if (entity.getType() == EntityType.PLAYER) {
                 parsePlayerHit((Player) entity, event.getRegainReason() != RegainReason.SATIATED && event.getAmount() > 0.0);
                 return;
             }
@@ -168,7 +169,11 @@ public class DamageListener implements Listener {
         }
     }
 
-    protected static void parseMobHit(LivingEntity mob, boolean damagedByEntity) {
+    protected static void parseMobHit(LivingEntity mob, boolean damagedByEntity)
+    {
+        parseMobHit(mob, damagedByEntity, 0D);
+    }
+    protected static void parseMobHit(LivingEntity mob, boolean damagedByEntity, double damage) {
         /* Type check */
         final EntityType type = mob.getType();
         if (mobTypeDisabling && mobDisabledTypes.contains(type)) {
@@ -196,7 +201,7 @@ public class DamageListener implements Listener {
          */
         String customName = mob.getCustomName();
         if (customName != null) {
-            if (!customName.startsWith("§r")) {
+            if (!customName.startsWith("\u00A7r")) {
                 if (showOnCustomNames) {
                     namesTable.put(mob.getEntityId(), new StringBoolean(customName, mob.isCustomNameVisible()));
                 } else {
@@ -206,7 +211,7 @@ public class DamageListener implements Listener {
         }
 
         if (mobHideDelay == 0L) {
-            showMobHealthBar(mob);
+            showMobHealthBar(mob, damage);
             return;
         }
 
@@ -220,33 +225,36 @@ public class DamageListener implements Listener {
                 //eventually cancel previous tasks
                 scheduler.cancelTask(eventualTaskID);
             }
-            showMobHealthBar(mob);
+            showMobHealthBar(mob, damage);
             hideMobBarLater(mob);
             return;
         } else {
 
             //it's not damaged by entity, if the health was displayed only update it
             if (mobTable.containsKey(mob.getEntityId())) {
-                showMobHealthBar(mob);
+                showMobHealthBar(mob, damage);
             }
             return;
         }
     }
 
-    private static void showMobHealthBar(final LivingEntity mob) {
+    private static void showMobHealthBar(final LivingEntity mob, final double damage) {
         scheduler.scheduleSyncDelayedTask(plugin, new Runnable() {
             @Override
             public void run() {
 
                 //check for compatibility
-                double health = mob.getHealth();
-                double max = mob.getMaxHealth();
+                //double health = mob.getHealth();
+                //double max = mob.getMaxHealth();
 
                 //if the health is 0
-                if (health <= 0.0) {
+                if (mob.getHealth() <= 0.0) {
                     return;
                 }
 
+                MobHealthbarUtils.handleMobHealthbars(mob, damage);
+
+                /*
                 //what type of health should be displayed?
                 if (barStyle == BarType.BAR) {
                     mob.setCustomName("§r" + barArray[Utils.roundUpPositiveWithMax(((health / max) * 20.0), 20)]);
@@ -270,10 +278,12 @@ public class DamageListener implements Listener {
                     mob.setCustomName(sb.toString());
                 }
 
+
                 //check for visibility
                 if (!mobSemiHidden) {
                     mob.setCustomNameVisible(true);
                 }
+                */
             }
         });
     }
@@ -301,7 +311,7 @@ public class DamageListener implements Listener {
     public static void hideBar(LivingEntity mob) {
 
         String cname = mob.getCustomName();
-        if (cname != null && !cname.startsWith("§r")) {
+        if (cname != null && !cname.startsWith("\u00A7r")) {
             //it's a real name! Don't touch it!
             return;
         }
@@ -335,7 +345,7 @@ public class DamageListener implements Listener {
             return null;
         }
 
-        if (cname.startsWith("§r")) {
+        if (cname.startsWith("\u00A7r")) {
             if (showOnCustomNames) {
                 int id = mob.getEntityId();
                 StringBoolean sb = namesTable.get(id);
@@ -387,7 +397,7 @@ public class DamageListener implements Listener {
 
     private static String getName(LivingEntity mob, String mobType) {
         String customName = mob.getCustomName();
-        if (customName != null && !customName.startsWith("§r")) {
+        if (customName != null && !customName.startsWith("\u00A7r")) {
             return customName;
         }
 
