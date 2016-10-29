@@ -116,19 +116,19 @@ public class DamageListener implements Listener {
         }
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
-    public void onEntitySpawn(CreatureSpawnEvent event) {
-        if (mobHideDelay == 0L && mobEnabled) {
-            //show the bar on all the mobs
-            final LivingEntity mob = event.getEntity();
-            scheduler.scheduleSyncDelayedTask(plugin, new Runnable() {
-                @Override
-                public void run() {
-                    parseMobHit(mob, true);
-                }
-            }, 1L);
-        }
-    }
+//    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
+//    public void onEntitySpawn(CreatureSpawnEvent event) {
+//        if (mobHideDelay == 0L && mobEnabled) {
+//            //show the bar on all the mobs
+//            final LivingEntity mob = event.getEntity();
+//            scheduler.scheduleSyncDelayedTask(plugin, new Runnable() {
+//                @Override
+//                public void run() {
+//                    parseMobHit(mob, true);
+//                }
+//            }, 1L);
+//        }
+//    }
 
     private static void parsePlayerHit(final Player player, boolean damagedByEntity) {
         String pname = player.getName();
