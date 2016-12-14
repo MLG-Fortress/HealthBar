@@ -128,31 +128,10 @@ public class PlayerBar {
             {
                 team = sb.registerNewTeam(op.getName());
             }
-            int healthOn10 = Utils.roundUpPositiveWithMax(((health * 10.0) / max), 10);
 
-            Color color;
+            //int healthOn10 = Utils.roundUpPositiveWithMax(((health * 10.0) / max), 10);
 
-            switch (healthOn10)
-            {
-                case 0:
-                case 1:
-                case 2:
-                    color = Color.RED;
-                    break;
-                case 3:
-                case 4:
-                case 5:
-                    color = Color.YELLOW;
-                    break;
-                case 6:
-                case 7:
-                case 8:
-                case 9:
-                case 10:
-                default:
-                    color = Color.GREEN;
-                    break;
-            }
+            String color = getColor(health, max);
 
             StringBuilder healthbarSuffix = new StringBuilder(" " + color);
 
@@ -222,12 +201,12 @@ public class PlayerBar {
     public static String getColor(double health, double max) {
         double ratio = health / max;
         if (ratio > 0.5) {
-            return "§a"; //more than half health -> green
+            return "\u00a7a"; //more than half health -> green
         }
         if (ratio > 0.25) {
-            return "§e"; //more than quarter health -> yellow
+            return "\u00a7e"; //more than quarter health -> yellow
         }
-        return "§c"; //critical health -> red
+        return "\u00a7c"; //critical health -> red
     }
 
     public static void loadConfiguration() {
