@@ -1,5 +1,6 @@
 package com.gmail.filoghost.healthbar;
 
+import org.bukkit.Color;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -128,39 +129,79 @@ public class PlayerBar {
                 team = sb.registerNewTeam(op.getName());
             }
             int healthOn10 = Utils.roundUpPositiveWithMax(((health * 10.0) / max), 10);
+
+            Color color;
+
             switch (healthOn10)
             {
+                case 0:
                 case 1:
-                    team.setSuffix(" §c▌§8▌▌▌▌▌▌▌▌▌");
-                    break;
                 case 2:
-                    team.setSuffix(" §c▌▌§8▌▌▌▌▌▌▌▌");
+                    color = Color.RED;
                     break;
                 case 3:
-                    team.setSuffix(" §e▌▌▌§8▌▌▌▌▌▌▌");
-                    break;
                 case 4:
-                    team.setSuffix(" §e▌▌▌▌§8▌▌▌▌▌▌");
-                    break;
                 case 5:
-                    team.setSuffix(" §e▌▌▌▌▌§8▌▌▌▌▌");
+                    color = Color.YELLOW;
                     break;
                 case 6:
-                    team.setSuffix(" §a▌▌▌▌▌▌§8▌▌▌▌");
-                    break;
                 case 7:
-                    team.setSuffix(" §a▌▌▌▌▌▌▌§8▌▌▌");
-                    break;
                 case 8:
-                    team.setSuffix(" §a▌▌▌▌▌▌▌▌§8▌▌");
-                    break;
                 case 9:
-                    team.setSuffix(" §a▌▌▌▌▌▌▌▌▌§8▌");
-                    break;
                 case 10:
-                    team.setSuffix(" §a▌▌▌▌▌▌▌▌▌▌");
+                default:
+                    color = Color.GREEN;
                     break;
             }
+
+            StringBuilder healthbarSuffix = new StringBuilder(" " + color);
+
+            int healthInt = Utils.roundUpPositive(health / 3);
+            switch (healthInt)
+            {
+                case 0:
+                case 1:
+                    healthbarSuffix.append("\u258c"); //▌
+                    break;
+                case 2:
+                    healthbarSuffix.append("\u258c\u258c");
+                    break;
+                case 3:
+                    healthbarSuffix.append("\u258c\u258c\u258c");
+                    break;
+                case 4:
+                    healthbarSuffix.append("\u258c\u258c\u258c\u258c");
+                    break;
+                case 5:
+                    healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c");
+                    break;
+                case 6:
+                    healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c");
+                    break;
+                case 7:
+                    healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
+                    break;
+                case 8:
+                    healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
+                    break;
+                case 9:
+                    healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
+                    break;
+                case 10:
+                    healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
+                    break;
+                case 11:
+                    healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
+                    break;
+                case 12:
+                    healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
+                    break;
+                case 13:
+                default:
+                    healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
+                    break;
+            }
+            team.setSuffix(healthbarSuffix.toString());
             team.addPlayer(op);
         } else {
 
