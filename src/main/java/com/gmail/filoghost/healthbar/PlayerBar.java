@@ -135,7 +135,7 @@ public class PlayerBar {
 
             StringBuilder healthbarSuffix = new StringBuilder(" " + color);
 
-            int healthInt = Utils.roundUpPositive(health / 3);
+            int healthInt = Utils.roundUpPositive(health / 6);
             switch (healthInt)
             {
                 case 0:
