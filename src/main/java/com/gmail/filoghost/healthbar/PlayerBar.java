@@ -140,42 +140,43 @@ public class PlayerBar {
             {
                 case 0:
                 case 1:
+                case 2:
                     healthbarSuffix.append("\u258c"); //▌
                     break;
-                case 2:
+                case 3:
                     healthbarSuffix.append("\u258c\u258c");
                     break;
-                case 3:
+                case 4:
                     healthbarSuffix.append("\u258c\u258c\u258c");
                     break;
-                case 4:
+                case 5:
                     healthbarSuffix.append("\u258c\u258c\u258c\u258c");
                     break;
-                case 5:
+                case 6:
                     healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c");
                     break;
-                case 6:
+                case 7:
                     healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c");
                     break;
-                case 7:
+                case 8:
                     healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
                     break;
-                case 8:
+                case 9:
                     healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
                     break;
-                case 9:
+                case 10:
                     healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
                     break;
-                case 10:
+                case 11:
                     healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
                     break;
-                case 11:
+                case 12:
                     healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
                     break;
-                case 12:
+                case 13:
                     healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
                     break;
-                case 13:
+                case 14:
                 default:
                     healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
                     break;
@@ -241,7 +242,7 @@ public class PlayerBar {
         if (player.isHealthScaled()) {
             return Utils.round(player.getHealth() * 10.0 / player.getMaxHealth());
         } else {
-            return Utils.round(player.getHealth() / 2);
+            return Utils.roundUpPositive(player.getHealth() / 2);
         }
     }
 
