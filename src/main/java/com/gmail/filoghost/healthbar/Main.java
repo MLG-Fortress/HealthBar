@@ -58,7 +58,8 @@ public class Main extends JavaPlugin {
 
         //register events
         getServer().getPluginManager().registerEvents(damageListener, this);
-        getServer().getPluginManager().registerEvents(deathListener, this);
+        if (Main.plugin.getConfig().getBoolean(Configuration.Nodes.FIX_DEATH_MESSAGES.getNode()))
+            getServer().getPluginManager().registerEvents(deathListener, this);
         getServer().getPluginManager().registerEvents(miscListeners, this);
 
         //other files
