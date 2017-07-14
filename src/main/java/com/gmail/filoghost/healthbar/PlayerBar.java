@@ -135,7 +135,7 @@ public class PlayerBar {
 
             StringBuilder healthbarSuffix = new StringBuilder(" " + color);
 
-            int healthInt = Utils.roundUpPositive(health / 6);
+            int healthInt = Utils.roundUpPositive(health / 5);
             switch (healthInt)
             {
                 case 0:
@@ -165,22 +165,55 @@ public class PlayerBar {
                     healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
                     break;
                 case 10:
+                default:
                     healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
                     break;
-                case 11:
-                    healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
-                    break;
-                case 12:
-                    healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
-                    break;
-                case 13:
-                    healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
-                    break;
-                case 14:
-                default:
-                    healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
-                    break;
             }
+
+
+            if (INSTANCE.getServer().getPluginManager().getPlugin("AborptionShields") != null)
+            {
+                ShieldManager shieldManager = ((AbsorptionShields)INSTANCE.getServer().getPluginManager().getPlugin("AborptionShields")).getShieldManager();
+                int shieldHealth = Utils.roundUpPositive(shieldManager.getShieldHealth(player) / 5);
+                if (shieldHealth > 0)
+                    healthbarSuffix.append("\u00a76");
+                switch (shieldHealth)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                    case 2:
+                        healthbarSuffix.append("\u258c"); //▌
+                        break;
+                    case 3:
+                        healthbarSuffix.append("\u258c\u258c");
+                        break;
+                    case 4:
+                        healthbarSuffix.append("\u258c\u258c\u258c");
+                        break;
+                    case 5:
+                        healthbarSuffix.append("\u258c\u258c\u258c\u258c");
+                        break;
+                    case 6:
+                        healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c");
+                        break;
+                    case 7:
+                        healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c");
+                        break;
+                    case 8:
+                        healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
+                        break;
+                    case 9:
+                        healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
+                        break;
+                    case 10:
+                    default:
+                        healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
+                        break;
+                }
+            }
+
+            healthbarSuffix.setLength(16);
             team.setSuffix(healthbarSuffix.toString());
             team.addPlayer(op);
         } else {
@@ -230,9 +263,10 @@ public class PlayerBar {
 
         if (useCustomBar) {
             PlayerBarUtils.create10CustomTeams(sb, Utils.loadFile("custom-player-bar.yml", INSTANCE));
-        } else if (!textMode) {
-        //    PlayerBarUtils.create10DefaultTeams(sb, config.getInt(Configuration.Nodes.PLAYERS_AFTER_STYLE.getNode()));
         }
+        //else if (!textMode) {
+        //    PlayerBarUtils.create10DefaultTeams(sb, config.getInt(Configuration.Nodes.PLAYERS_AFTER_STYLE.getNode()));
+        //}
         //else creates the teams at the moment
 
         PlayerBarUtils.setAllTeamsInvisibility(sb);
