@@ -1,6 +1,8 @@
 package com.gmail.filoghost.healthbar;
 
-import org.bukkit.Color;
+import com.gmail.filoghost.healthbar.api.BarHideEvent;
+import com.gmail.filoghost.healthbar.utils.PlayerBarUtils;
+import com.gmail.filoghost.healthbar.utils.Utils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -9,10 +11,8 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
-
-import com.gmail.filoghost.healthbar.api.BarHideEvent;
-import com.gmail.filoghost.healthbar.utils.PlayerBarUtils;
-import com.gmail.filoghost.healthbar.utils.Utils;
+import to.us.tf.absorptionshields.AbsorptionShields;
+import to.us.tf.absorptionshields.shield.ShieldUtils;
 
 public class PlayerBar {
 
@@ -133,83 +133,23 @@ public class PlayerBar {
 
             String color = getColor(health, max);
 
-            StringBuilder healthbarSuffix = new StringBuilder(" " + color);
+            StringBuilder healthbarSuffix = new StringBuilder(color);
 
-            int healthInt = Utils.roundUpPositive(health / 5);
-            switch (healthInt)
+            int healthInt = Utils.roundUpPositive(health / 10);
+            for (int i = 0; i < healthInt; i++)
             {
-                case 0:
-                case 1:
-                case 2:
-                    healthbarSuffix.append("\u258c"); //▌
-                    break;
-                case 3:
-                    healthbarSuffix.append("\u258c\u258c");
-                    break;
-                case 4:
-                    healthbarSuffix.append("\u258c\u258c\u258c");
-                    break;
-                case 5:
-                    healthbarSuffix.append("\u258c\u258c\u258c\u258c");
-                    break;
-                case 6:
-                    healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c");
-                    break;
-                case 7:
-                    healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c");
-                    break;
-                case 8:
-                    healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
-                    break;
-                case 9:
-                    healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
-                    break;
-                case 10:
-                default:
-                    healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
-                    break;
+                healthbarSuffix.append("\u258c");
             }
 
-
-            if (INSTANCE.getServer().getPluginManager().getPlugin("AborptionShields") != null)
+            //Append shield health, if any
+            if (INSTANCE.getServer().getPluginManager().getPlugin("AbsorptionShields") != null)
             {
-                ShieldManager shieldManager = ((AbsorptionShields)INSTANCE.getServer().getPluginManager().getPlugin("AborptionShields")).getShieldManager();
-                int shieldHealth = Utils.roundUpPositive(shieldManager.getShieldHealth(player) / 5);
-                if (shieldHealth > 0)
-                    healthbarSuffix.append("\u00a76");
-                switch (shieldHealth)
+                ShieldUtils shieldUtils = ((AbsorptionShields)INSTANCE.getServer().getPluginManager().getPlugin("AborptionShields")).getShieldUtils();
+                int shieldHealth = Utils.roundUpPositive(shieldUtils.getShieldHealth(player) / 10);
+                healthbarSuffix.append("\u00a76");
+                for (int i = 0; i < shieldHealth; i++)
                 {
-                    case 0:
-                        break;
-                    case 1:
-                    case 2:
-                        healthbarSuffix.append("\u258c"); //▌
-                        break;
-                    case 3:
-                        healthbarSuffix.append("\u258c\u258c");
-                        break;
-                    case 4:
-                        healthbarSuffix.append("\u258c\u258c\u258c");
-                        break;
-                    case 5:
-                        healthbarSuffix.append("\u258c\u258c\u258c\u258c");
-                        break;
-                    case 6:
-                        healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c");
-                        break;
-                    case 7:
-                        healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c");
-                        break;
-                    case 8:
-                        healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
-                        break;
-                    case 9:
-                        healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
-                        break;
-                    case 10:
-                    default:
-                        healthbarSuffix.append("\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c\u258c");
-                        break;
+                    healthbarSuffix.append("\u258c");
                 }
             }
 
