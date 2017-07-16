@@ -74,16 +74,16 @@ public class PlayerBar {
     }
 
     public static void hideHealthBar(Player player) {
-        Team team = sb.getTeam("hbr0");
-        if (team == null) {
-            team = sb.registerNewTeam("hbr0");
-            team.setCanSeeFriendlyInvisibles(false);
-        }
-        OfflinePlayer offPlayer = (OfflinePlayer) player;
-        team.addPlayer(offPlayer);
+        //Team team = sb.getTeam("hbr0");
+        //if (team == null) {
+        //    team = sb.registerNewTeam("hbr0");
+        //    team.setCanSeeFriendlyInvisibles(false);
+        //}
+        //OfflinePlayer offPlayer = (OfflinePlayer) player;
+        //team.addPlayer(offPlayer);
 
         //api - call the custom event after hiding the bar
-        INSTANCE.getServer().getPluginManager().callEvent(new BarHideEvent(offPlayer));
+        //INSTANCE.getServer().getPluginManager().callEvent(new BarHideEvent(offPlayer));
     }
 
     public static void updateHealthBelow(final Player player) {
