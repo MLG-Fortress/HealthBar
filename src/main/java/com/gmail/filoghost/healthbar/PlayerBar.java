@@ -148,9 +148,7 @@ public class PlayerBar {
                 int shieldHealth = Utils.roundUpPositive(shieldUtils.getShieldHealth(player) / 10);
                 healthbarSuffix.append("\u00a76");
                 for (int i = 0; i < shieldHealth; i++)
-                {
                     healthbarSuffix.append("\u258c");
-                }
             }
 
             if (healthbarSuffix.length() > 16)
