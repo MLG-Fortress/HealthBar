@@ -153,7 +153,8 @@ public class PlayerBar {
                 }
             }
 
-            healthbarSuffix.setLength(16);
+            if (healthbarSuffix.length() > 16)
+                healthbarSuffix.setLength(16);
             team.setSuffix(healthbarSuffix.toString());
             team.addPlayer(op);
         } else {
