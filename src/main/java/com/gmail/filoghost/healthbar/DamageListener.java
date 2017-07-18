@@ -9,6 +9,7 @@ import java.util.Map;
 import com.gmail.nossr50.MobHealthbarUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -368,7 +369,6 @@ public class DamageListener implements Listener {
 
                 //declares variables
                 double health = p.getHealth();
-                double max = p.getMaxHealth();
 
                 //if the health is 0 remove the bar and return
                 if (health == 0) {
@@ -376,7 +376,7 @@ public class DamageListener implements Listener {
                     return;
                 }
 
-                PlayerBar.setHealthSuffix(p, health, max);
+                PlayerBar.setHealthSuffix(p, health, p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
             }
         });
     }
