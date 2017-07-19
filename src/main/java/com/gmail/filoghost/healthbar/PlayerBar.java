@@ -146,13 +146,18 @@ public class PlayerBar {
             {
                 ShieldUtils shieldUtils = ((AbsorptionShields)INSTANCE.getServer().getPluginManager().getPlugin("AbsorptionShields")).getShieldUtils();
                 int shieldHealth = Utils.roundUpPositive(shieldUtils.getShieldHealth(player) / 10);
-                healthbarSuffix.append("\u00a73");
+                if (shieldHealth > 0)
+                    healthbarSuffix.append("\u00a73");
                 for (int i = 0; i < shieldHealth; i++)
                     healthbarSuffix.append("\u258c");
             }
 
             if (healthbarSuffix.length() > 16)
-                healthbarSuffix.setLength(16);
+            {
+                healthbarSuffix.setLength(15);
+                healthbarSuffix.append('+');
+            }
+
             team.setSuffix(healthbarSuffix.toString());
             team.addPlayer(op);
         } else {
