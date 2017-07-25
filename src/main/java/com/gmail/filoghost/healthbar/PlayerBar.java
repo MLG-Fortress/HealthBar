@@ -147,7 +147,7 @@ public class PlayerBar {
                 ShieldUtils shieldUtils = ((AbsorptionShields)INSTANCE.getServer().getPluginManager().getPlugin("AbsorptionShields")).getShieldUtils();
                 int shieldHealth = Utils.roundUpPositive(shieldUtils.getShieldHealth(player) / 10);
                 if (shieldHealth > 0)
-                    healthbarSuffix.append("\u00a73");
+                    healthbarSuffix.append("\u00a7b");
                 for (int i = 0; i < shieldHealth; i++)
                     healthbarSuffix.append("\u258c");
             }
