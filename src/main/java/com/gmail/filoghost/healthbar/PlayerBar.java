@@ -217,11 +217,12 @@ public class PlayerBar {
     }
 
     public static int getRawAmountOfHearts(Player player) {
-        if (player.isHealthScaled()) {
-            return Utils.round(player.getHealth() * 10.0 / player.getMaxHealth());
-        } else {
-            return Utils.roundUpPositive(player.getHealth() / 2);
-        }
+//        if (player.isHealthScaled()) {
+//            return Utils.round(player.getHealth() * 10.0 / player.getMaxHealth());
+//        } else {
+//            return Utils.roundUpPositive(player.getHealth() / 2);
+//        }
+        return Utils.roundUpPositive(player.getHealth() / 2);
     }
 
 }
