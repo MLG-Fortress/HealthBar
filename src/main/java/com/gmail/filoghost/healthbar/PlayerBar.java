@@ -123,7 +123,14 @@ public class PlayerBar {
 
         if (useCustomBar || (!textMode))
         {
+
+
             Team team = sb.getTeam(op.getName());
+
+            if (player.getScoreboard() != sb)
+            {
+                team = player.getScoreboard().getPlayerTeam(player);
+            }
             if (team == null)
             {
                 team = sb.registerNewTeam(op.getName());
@@ -135,7 +142,7 @@ public class PlayerBar {
 
             StringBuilder healthbarSuffix = new StringBuilder(color);
 
-            int healthInt = Utils.roundUpPositive(health / 10);
+            int healthInt = Utils.round(health / 2);
             for (int i = 0; i < healthInt; i++)
             {
                 healthbarSuffix.append("\u258c");
@@ -145,7 +152,7 @@ public class PlayerBar {
             if (INSTANCE.getServer().getPluginManager().getPlugin("AbsorptionShields") != null)
             {
                 ShieldUtils shieldUtils = ((AbsorptionShields)INSTANCE.getServer().getPluginManager().getPlugin("AbsorptionShields")).getShieldUtils();
-                int shieldHealth = Utils.roundUpPositive(shieldUtils.getShieldHealth(player) / 10);
+                int shieldHealth = Utils.roundUpPositive(shieldUtils.getShieldHealth(player) / 2);
                 if (shieldHealth > 0)
                     healthbarSuffix.append("\u00a76");
                 for (int i = 0; i < shieldHealth; i++)
