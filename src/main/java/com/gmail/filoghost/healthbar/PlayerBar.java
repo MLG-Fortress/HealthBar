@@ -125,16 +125,17 @@ public class PlayerBar {
         {
 
 
-            Team team = sb.getTeam(op.getName());
+            Team team = null;
 
             if (player.getScoreboard() != sb)
-            {
                 team = player.getScoreboard().getPlayerTeam(player);
-            }
             if (team == null)
             {
-                team = sb.registerNewTeam(op.getName());
+                player.setScoreboard(sb);
+                team = sb.getTeam(op.getName());
             }
+            if (team == null)
+                team = sb.registerNewTeam(op.getName());
 
             //int healthOn10 = Utils.roundUpPositiveWithMax(((health * 10.0) / max), 10);
 
