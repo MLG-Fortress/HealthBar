@@ -3,6 +3,8 @@ package com.gmail.filoghost.healthbar;
 import com.gmail.filoghost.healthbar.api.BarHideEvent;
 import com.gmail.filoghost.healthbar.utils.PlayerBarUtils;
 import com.gmail.filoghost.healthbar.utils.Utils;
+import com.robomwm.absorptionshields.AbsorptionShields;
+import com.robomwm.absorptionshields.shield.ShieldUtils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -11,8 +13,6 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
-import to.us.tf.absorptionshields.AbsorptionShields;
-import to.us.tf.absorptionshields.shield.ShieldUtils;
 
 public class PlayerBar {
 
