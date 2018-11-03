@@ -111,31 +111,23 @@ public class PlayerBar {
             return;
 
         Team team = sb.getTeam(op.getName());
-        if (team == null)
+        if (team != null)
             team.unregister();
     }
 
     public static void setHealthSuffix(Player player, double health, double max) {
 
-        OfflinePlayer op = (OfflinePlayer) player;
-        if (op == null)
-            return;
-
         if (useCustomBar || (!textMode))
         {
-
+            if (player.getScoreboard() == null)
+                player.setScoreboard(sb);
 
             Team team = null;
 
-            if (player.getScoreboard() != sb)
-                team = player.getScoreboard().getPlayerTeam(player);
+            team = sb.getTeam(player.getName());
+
             if (team == null)
-            {
-                player.setScoreboard(sb);
-                team = sb.getTeam(op.getName());
-            }
-            if (team == null)
-                team = sb.registerNewTeam(op.getName());
+                team = sb.registerNewTeam(player.getName());
 
             //int healthOn10 = Utils.roundUpPositiveWithMax(((health * 10.0) / max), 10);
 
@@ -167,7 +159,7 @@ public class PlayerBar {
             }
 
             team.setSuffix(healthbarSuffix.toString());
-            team.addPlayer(op);
+            team.addEntry(player.getName());
         } else {
 
             int intHealth = Utils.roundUpPositive(health);
@@ -180,7 +172,7 @@ public class PlayerBar {
                 team.setSuffix(" - " + color + intHealth + "§7/§a" + intMax);
                 team.setCanSeeFriendlyInvisibles(false);
             }
-            team.addPlayer(op);
+            team.addPlayer(player);
         }
     }
 
