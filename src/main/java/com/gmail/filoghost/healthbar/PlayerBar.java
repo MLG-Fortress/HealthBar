@@ -160,9 +160,9 @@ public class PlayerBar {
                     healthbarSuffix.append("\u258c");
             }
 
-            if (healthbarSuffix.length() > 16)
+            if (healthbarSuffix.length() > 64)
             {
-                healthbarSuffix.setLength(15);
+                healthbarSuffix.setLength(63);
                 healthbarSuffix.append('+');
             }
 
