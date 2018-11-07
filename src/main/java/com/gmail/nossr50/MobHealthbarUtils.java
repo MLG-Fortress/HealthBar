@@ -15,13 +15,13 @@ import org.bukkit.entity.LivingEntity;
 public final class MobHealthbarUtils {
     private MobHealthbarUtils() {};
 
-    /**
-     * Fix issues with death messages caused by the mob healthbars.
-     *
-     * @param deathMessage The original death message
-     * @param player The player who died
-     * @return the fixed death message
-     */
+//    /**
+//     * Fix issues with death messages caused by the mob healthbars.
+//     *
+//     * @param deathMessage The original death message
+//     * @param player The player who died
+//     * @return the fixed death message
+//     */
 //    public static String fixDeathMessage(String deathMessage, Player player) {
 //        EntityDamageEvent lastDamageCause = player.getLastDamageCause();
 //        String replaceString = lastDamageCause instanceof EntityDamageByEntityEvent ? StringUtils.getPrettyEntityTypeString(((EntityDamageByEntityEvent) lastDamageCause).getDamager().getType()) : "a mob";
@@ -84,7 +84,7 @@ public final class MobHealthbarUtils {
         ChatColor color = ChatColor.BLACK;
         String symbol;
 
-                fullDisplay = Math.min((int) (maxHealth / 2), 10);
+                fullDisplay = Math.min((int) (maxHealth / 2), 20);
                 symbol = "\u2764"; // ❤
 
                 if (healthPercentage >= 85) {

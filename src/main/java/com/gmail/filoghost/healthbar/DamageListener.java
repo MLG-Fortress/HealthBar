@@ -197,46 +197,48 @@ public class DamageListener implements Listener {
             }
         }
 
-        /**
-         * Custom name check
-         */
-        String customName = mob.getCustomName();
-        if (customName != null) {
-            if (!customName.startsWith("\u00A7r")) {
-                if (showOnCustomNames) {
-                    namesTable.put(mob.getEntityId(), new StringBoolean(customName, mob.isCustomNameVisible()));
-                } else {
-                    return;
-                }
-            }
-        }
+        showMobHealthBar(mob, damage);
 
-        if (mobHideDelay == 0L) {
-            showMobHealthBar(mob, damage);
-            return;
-        }
-
-        if (damagedByEntity) {
-            //display always if hit by entity
-
-            //remove eventual task
-            Integer eventualTaskID = mobTable.remove(mob.getEntityId());
-
-            if (eventualTaskID != null) {
-                //eventually cancel previous tasks
-                scheduler.cancelTask(eventualTaskID);
-            }
-            showMobHealthBar(mob, damage);
-            hideMobBarLater(mob);
-            return;
-        } else {
-
-            //it's not damaged by entity, if the health was displayed only update it
-            if (mobTable.containsKey(mob.getEntityId())) {
-                showMobHealthBar(mob, damage);
-            }
-            return;
-        }
+//        /**
+//         * Custom name check
+//         */
+//        String customName = mob.getCustomName();
+//        if (customName != null) {
+//            if (!customName.startsWith("\u00A7r")) {
+//                if (showOnCustomNames) {
+//                    namesTable.put(mob.getEntityId(), new StringBoolean(customName, mob.isCustomNameVisible()));
+//                } else {
+//                    return;
+//                }
+//            }
+//        }
+//
+//        if (mobHideDelay == 0L) {
+//            showMobHealthBar(mob, damage);
+//            return;
+//        }
+//
+//        if (damagedByEntity) {
+//            //display always if hit by entity
+//
+//            //remove eventual task
+//            Integer eventualTaskID = mobTable.remove(mob.getEntityId());
+//
+//            if (eventualTaskID != null) {
+//                //eventually cancel previous tasks
+//                scheduler.cancelTask(eventualTaskID);
+//            }
+//            showMobHealthBar(mob, damage);
+//            hideMobBarLater(mob);
+//            return;
+//        } else {
+//
+//            //it's not damaged by entity, if the health was displayed only update it
+//            if (mobTable.containsKey(mob.getEntityId())) {
+//                showMobHealthBar(mob, damage);
+//            }
+//            return;
+//        }
     }
 
     private static void showMobHealthBar(final LivingEntity mob, final double damage) {
@@ -503,15 +505,15 @@ public class DamageListener implements Listener {
             mobDisabledTypes = Utils.getTypesFromString(config.getString(Configuration.Nodes.MOB_DISABLED_TYPES.getNode()));
         }
 
-        if (mobHideDelay == 0L) {
-            for (World world : Bukkit.getWorlds()) {
-                for (LivingEntity mob : world.getLivingEntities()) {
-                    if (mob.getType() != EntityType.PLAYER) {
-                        parseMobHit(mob, true);
-                    }
-                }
-            }
-        }
+//        if (mobHideDelay == 0L) {
+//            for (World world : Bukkit.getWorlds()) {
+//                for (LivingEntity mob : world.getLivingEntities()) {
+//                    if (mob.getType() != EntityType.PLAYER) {
+//                        parseMobHit(mob, true);
+//                    }
+//                }
+//            }
+//        }
     }
 
 }
