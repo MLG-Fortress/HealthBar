@@ -144,17 +144,17 @@ public class MiscListeners implements Listener {
 //        }
 //    }
 
-    @EventHandler
-    public void onChunkUnload(ChunkUnloadEvent event) {
-        if (!DamageListener.mobEnabled) {
-            return;
-        }
-        for (Entity entity : event.getChunk().getEntities()) {
-            if (entity instanceof LivingEntity && entity.getType() != EntityType.PLAYER) {
-                DamageListener.hideBar((LivingEntity) entity);
-            }
-        }
-    }
+//    @EventHandler
+//    public void onChunkUnload(ChunkUnloadEvent event) {
+//        if (!DamageListener.mobEnabled) {
+//            return;
+//        }
+//        for (Entity entity : event.getChunk().getEntities()) {
+//            if (entity instanceof LivingEntity && entity.getType() != EntityType.PLAYER) {
+//                DamageListener.hideBar((LivingEntity) entity);
+//            }
+//        }
+//    }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void joinLowest(PlayerJoinEvent event) {
